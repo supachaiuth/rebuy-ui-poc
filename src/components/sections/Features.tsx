@@ -2,26 +2,29 @@
 
 import { motion } from "framer-motion";
 import { Shield, Zap, DollarSign } from "lucide-react";
-
-const features = [
-  {
-    icon: Shield,
-    title: "Secure & Private",
-    description: "Your data is wiped securely. We protect your privacy with industry-standard protocols.",
-  },
-  {
-    icon: Zap,
-    title: "Fast Process",
-    description: "Get your offer in minutes. Complete the entire process from anywhere in just a few steps.",
-  },
-  {
-    icon: DollarSign,
-    title: "Best Prices",
-    description: "We track market values daily to ensure you get the most competitive offer for your device.",
-  },
-];
+import { useTranslation } from "@/i18n";
 
 export default function Features() {
+  const { t } = useTranslation();
+
+  const features = [
+    {
+      icon: Shield,
+      title: t.features.secure.title,
+      description: t.features.secure.description,
+    },
+    {
+      icon: Zap,
+      title: t.features.fast.title,
+      description: t.features.fast.description,
+    },
+    {
+      icon: DollarSign,
+      title: t.features.bestPrice.title,
+      description: t.features.bestPrice.description,
+    },
+  ];
+
   return (
     <section className="py-32 bg-[var(--surface)] border-y border-[var(--border)]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -32,10 +35,10 @@ export default function Features() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-semibold text-[var(--text-primary)] mb-4 tracking-tight">
-            Why Choose ReBuy
+            {t.features.title}
           </h2>
           <p className="text-lg text-[var(--text-secondary)] max-w-xl mx-auto">
-            A premium experience from start to finish.
+            {t.features.subtitle}
           </p>
         </motion.div>
 

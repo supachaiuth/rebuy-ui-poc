@@ -2,26 +2,29 @@
 
 import { motion } from "framer-motion";
 import { Users, Clock, Star } from "lucide-react";
-
-const stats = [
-  {
-    icon: Users,
-    value: "50K+",
-    label: "Devices Processed",
-  },
-  {
-    icon: Clock,
-    value: "24h",
-    label: "Average Payout Time",
-  },
-  {
-    icon: Star,
-    value: "4.9",
-    label: "Customer Rating",
-  },
-];
+import { useTranslation } from "@/i18n";
 
 export default function TrustStats() {
+  const { t } = useTranslation();
+
+  const stats = [
+    {
+      icon: Users,
+      value: "50K+",
+      label: t.trustStats.devicesProcessed,
+    },
+    {
+      icon: Clock,
+      value: "24h",
+      label: t.trustStats.averagePayoutTime,
+    },
+    {
+      icon: Star,
+      value: "4.9",
+      label: t.trustStats.customerRating,
+    },
+  ];
+
   return (
     <section className="py-24 bg-[var(--surface)] border-y border-[var(--border)]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">

@@ -4,8 +4,11 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import Button from "../ui/Button";
+import { useTranslation } from "@/i18n";
 
 export default function Hero() {
+  const { t } = useTranslation();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-[var(--background)] via-[var(--background)] to-[var(--surface)]" />
@@ -23,7 +26,7 @@ export default function Hero() {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--surface)] border border-[var(--border)] mb-8">
             <Sparkles className="w-4 h-4 text-[var(--accent)]" />
-            <span className="text-sm text-[var(--text-secondary)]">Premium Device Buyback</span>
+            <span className="text-sm text-[var(--text-secondary)]">{t.hero.badge}</span>
           </div>
         </motion.div>
 
@@ -33,9 +36,9 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
           className="text-5xl md:text-7xl lg:text-8xl font-semibold text-[var(--text-primary)] tracking-tight leading-tight mb-8"
         >
-          Sell your device.
+          {t.hero.title}
           <br />
-          <span className="text-[var(--accent)]">Get the best value.</span>
+          <span className="text-[var(--accent)]">{t.hero.titleAccent}</span>
         </motion.h1>
 
         <motion.p
@@ -44,8 +47,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           className="text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto mb-12 leading-relaxed"
         >
-          Turn your used MacBook, iPhone, iPad, or Apple Watch into cash. 
-          Premium service, competitive offers, and fast payment.
+          {t.hero.description}
         </motion.p>
 
         <motion.div
@@ -56,13 +58,13 @@ export default function Hero() {
         >
           <Link href="/device-form">
             <Button size="lg" className="group">
-              Get an Offer
+              {t.hero.ctaPrimary}
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
           </Link>
           <Link href="#devices">
             <Button variant="outline" size="lg">
-              See What We Buy
+              {t.hero.ctaSecondary}
             </Button>
           </Link>
         </motion.div>

@@ -12,9 +12,10 @@ import Textarea from "@/components/ui/Textarea";
 import Checkbox from "@/components/ui/Checkbox";
 import Card from "@/components/ui/Card";
 import StepIndicator from "@/components/form/StepIndicator";
+import { useTranslation } from "@/i18n";
 
 const deviceTypes = [
-  { value: "", label: "Select device type" },
+  { value: "", labelKey: "selectDeviceType" },
   { value: "macbook", label: "MacBook" },
   { value: "iphone", label: "iPhone" },
   { value: "ipad", label: "iPad" },
@@ -22,7 +23,7 @@ const deviceTypes = [
 ];
 
 const macbookModels = [
-  { value: "", label: "Select model" },
+  { value: "", labelKey: "selectModel" },
   { value: "macbook-pro-16-2023", label: "MacBook Pro 16\" (2023)" },
   { value: "macbook-pro-14-2023", label: "MacBook Pro 14\" (2023)" },
   { value: "macbook-pro-16-2021", label: "MacBook Pro 16\" (2021)" },
@@ -34,7 +35,7 @@ const macbookModels = [
 ];
 
 const iphoneModels = [
-  { value: "", label: "Select model" },
+  { value: "", labelKey: "selectModel" },
   { value: "iphone-15-pro-max", label: "iPhone 15 Pro Max" },
   { value: "iphone-15-pro", label: "iPhone 15 Pro" },
   { value: "iphone-15", label: "iPhone 15" },
@@ -49,20 +50,12 @@ const iphoneModels = [
 ];
 
 const storageOptions = [
-  { value: "", label: "Select storage" },
+  { value: "", labelKey: "selectStorage" },
   { value: "128gb", label: "128GB" },
   { value: "256gb", label: "256GB" },
   { value: "512gb", label: "512GB" },
   { value: "1tb", label: "1TB" },
   { value: "2tb", label: "2TB" },
-];
-
-const conditionOptions = [
-  { value: "", label: "Select condition" },
-  { value: "like-new", label: "Like New - No visible scratches" },
-  { value: "good", label: "Good - Minor scratches visible" },
-  { value: "fair", label: "Fair - Visible wear and scratches" },
-  { value: "poor", label: "Poor - Heavy wear or damage" },
 ];
 
 const accessoryOptions = [
@@ -74,6 +67,8 @@ const accessoryOptions = [
 ];
 
 export default function DeviceFormPage() {
+  const { t } = useTranslation();
+  
   const [formData, setFormData] = useState({
     deviceType: "",
     model: "",
@@ -83,6 +78,14 @@ export default function DeviceFormPage() {
     accessories: [] as string[],
     notes: "",
   });
+
+  const conditionOptions = [
+    { value: "", labelKey: "selectCondition" },
+    { value: "like-new", labelKey: "conditionLikeNew" },
+    { value: "good", labelKey: "conditionGood" },
+    { value: "fair", labelKey: "conditionFair" },
+    { value: "poor", labelKey: "conditionPoor" },
+  ];
 
   const updateField = (field: string, value: string | string[]) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -104,12 +107,19 @@ export default function DeviceFormPage() {
       case "iphone":
         return iphoneModels;
       case "ipad":
-        return [{ value: "", label: "Coming soon" }];
+        return [{ value: "", labelKey: "comingSoon" }];
       case "apple-watch":
-        return [{ value: "", label: "Coming soon" }];
+        return [{ value: "", labelKey: "comingSoon" }];
       default:
-        return [{ value: "", label: "Select device type first" }];
+        return [{ value: "", labelKey: "selectDeviceTypeFirst" }];
     }
+  };
+
+  const getOptionLabel = (option: { value: string; label?: string; labelKey?: string }) => {
+    if (option.labelKey) {
+      return t.deviceForm[option.labelKey as keyof typeof t.deviceForm] as string;
+    }
+    return option.label || "";
   };
 
   return (
@@ -128,27 +138,30 @@ export default function DeviceFormPage() {
               className="inline-flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors mb-8"
             >
               <ArrowLeft className="w-4 h-4" />
-              Back to Home
+              {t.deviceForm.backToHome}
             </Link>
 
             <h1 className="text-3xl md:text-4xl font-semibold text-[var(--text-primary)] mb-2">
-              Device Details
+              {t.deviceForm.title}
             </h1>
             <p className="text-[var(--text-secondary)] mb-10">
-              Tell us about the device you want to sell.
+              {t.deviceForm.subtitle}
             </p>
 
             <StepIndicator 
               currentStep={2} 
-              steps={["Device Type", "Details", "Review"]} 
+              steps={[t.deviceForm.step1, t.deviceForm.step2, t.deviceForm.step3]} 
             />
 
             <Card variant="bordered" className="p-8">
               <div className="space-y-8">
                 <Select
-                  label="Device Type"
+                  label={t.deviceForm.title}
                   id="deviceType"
-                  options={deviceTypes}
+                  options={deviceTypes.map((opt) => ({
+                    value: opt.value,
+                    label: opt.value === "" ? getOptionLabel(opt) : (opt.label || ""),
+                  }))}
                   value={formData.deviceType}
                   onChange={(e) => {
                     updateField("deviceType", e.target.value);
@@ -165,7 +178,10 @@ export default function DeviceFormPage() {
                     <Select
                       label="Model"
                       id="model"
-                      options={getModels()}
+                      options={getModels().map((opt) => ({
+                        value: opt.value,
+                        label: opt.value === "" ? getOptionLabel(opt) : (opt.label || ""),
+                      }))}
                       value={formData.model}
                       onChange={(e) => updateField("model", e.target.value)}
                     />
@@ -179,9 +195,12 @@ export default function DeviceFormPage() {
                     transition={{ duration: 0.3 }}
                   >
                     <Select
-                      label="Storage"
+                      label={t.summary.storage}
                       id="storage"
-                      options={storageOptions}
+                      options={storageOptions.map((opt) => ({
+                        value: opt.value,
+                        label: opt.value === "" ? getOptionLabel(opt) : (opt.label || ""),
+                      }))}
                       value={formData.storage}
                       onChange={(e) => updateField("storage", e.target.value)}
                     />
@@ -198,25 +217,28 @@ export default function DeviceFormPage() {
                     <Select
                       label="Condition"
                       id="condition"
-                      options={conditionOptions}
+                      options={conditionOptions.map((opt) => ({
+                        value: opt.value,
+                        label: opt.value === "" ? getOptionLabel(opt) : getOptionLabel(opt),
+                      }))}
                       value={formData.condition}
                       onChange={(e) => updateField("condition", e.target.value)}
                     />
 
                     <Input
-                      label="Battery Health (%)"
+                      label={t.deviceForm.batteryHealth}
                       id="batteryHealth"
                       type="number"
                       min="0"
                       max="100"
-                      placeholder="e.g. 85"
+                      placeholder={t.deviceForm.batteryPlaceholder}
                       value={formData.batteryHealth}
                       onChange={(e) => updateField("batteryHealth", e.target.value)}
                     />
 
                     <div>
                       <label className="block text-sm text-[var(--text-secondary)] mb-3 font-medium">
-                        Included Accessories
+                        {t.deviceForm.includedAccessories}
                       </label>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {accessoryOptions.map((accessory) => (
@@ -232,9 +254,9 @@ export default function DeviceFormPage() {
                     </div>
 
                     <Textarea
-                      label="Additional Notes"
+                      label={t.deviceForm.additionalNotes}
                       id="notes"
-                      placeholder="Any additional information about your device..."
+                      placeholder={t.deviceForm.notesPlaceholder}
                       value={formData.notes}
                       onChange={(e) => updateField("notes", e.target.value)}
                       rows={4}
@@ -247,18 +269,18 @@ export default function DeviceFormPage() {
                 <Link href="/">
                   <Button variant="ghost" size="md">
                     <ArrowLeft className="w-4 h-4 mr-2" />
-                    Back
+                    {t.deviceForm.back}
                   </Button>
                 </Link>
 
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Button variant="secondary" size="md">
                     <Save className="w-4 h-4 mr-2" />
-                    Save Draft
+                    {t.deviceForm.saveDraft}
                   </Button>
                   <Link href="/summary">
                     <Button size="md">
-                      Check Offer
+                      {t.deviceForm.checkOffer}
                       <Calculator className="w-4 h-4 ml-2" />
                     </Button>
                   </Link>

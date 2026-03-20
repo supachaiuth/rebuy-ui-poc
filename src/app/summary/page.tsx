@@ -9,6 +9,7 @@ import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
 import StepIndicator from "@/components/form/StepIndicator";
+import { useTranslation } from "@/i18n";
 
 const mockData = {
   deviceType: "MacBook",
@@ -36,6 +37,8 @@ const conditionBadgeVariant = (condition: string) => {
 };
 
 export default function SummaryPage() {
+  const { t } = useTranslation();
+
   return (
     <main className="min-h-screen bg-[var(--background)]">
       <Navbar />
@@ -52,19 +55,19 @@ export default function SummaryPage() {
               className="inline-flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors mb-8"
             >
               <ArrowLeft className="w-4 h-4" />
-              Back to Device Details
+              {t.summary.backToDetails}
             </Link>
 
             <h1 className="text-3xl md:text-4xl font-semibold text-[var(--text-primary)] mb-2">
-              Review Your Details
+              {t.summary.title}
             </h1>
             <p className="text-[var(--text-secondary)] mb-10">
-              Please review your device information before submitting.
+              {t.summary.subtitle}
             </p>
 
             <StepIndicator 
               currentStep={3} 
-              steps={["Device Type", "Details", "Review"]} 
+              steps={[t.deviceForm.step1, t.deviceForm.step2, t.deviceForm.step3]} 
             />
 
             <div className="space-y-6">
@@ -97,23 +100,23 @@ export default function SummaryPage() {
 
               <Card variant="bordered" className="p-8">
                 <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-6">
-                  Condition Details
+                  {t.summary.conditionDetails}
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
-                    <span className="text-sm text-[var(--text-muted)]">Battery Health</span>
+                    <span className="text-sm text-[var(--text-muted)]">{t.summary.batteryHealth}</span>
                     <p className="text-[var(--text-primary)] font-medium mt-1">
                       {mockData.batteryHealth}
                     </p>
                   </div>
                   <div>
-                    <span className="text-sm text-[var(--text-muted)]">Storage</span>
+                    <span className="text-sm text-[var(--text-muted)]">{t.summary.storage}</span>
                     <p className="text-[var(--text-primary)] font-medium mt-1">
                       {mockData.storage}
                     </p>
                   </div>
                   <div className="sm:col-span-2">
-                    <span className="text-sm text-[var(--text-muted)]">Included Accessories</span>
+                    <span className="text-sm text-[var(--text-muted)]">{t.summary.includedAccessories}</span>
                     <div className="flex flex-wrap gap-2 mt-2">
                       {mockData.accessories.map((acc) => (
                         <Badge key={acc} variant="default">{acc}</Badge>
@@ -122,7 +125,7 @@ export default function SummaryPage() {
                   </div>
                   {mockData.notes && (
                     <div className="sm:col-span-2">
-                      <span className="text-sm text-[var(--text-muted)]">Notes</span>
+                      <span className="text-sm text-[var(--text-muted)]">{t.summary.notes}</span>
                       <p className="text-[var(--text-secondary)] mt-1">
                         {mockData.notes}
                       </p>
@@ -134,14 +137,13 @@ export default function SummaryPage() {
               <Card variant="bordered" className="p-8 bg-gradient-to-br from-[var(--surface)] to-[var(--surface-elevated)]">
                 <div className="text-center">
                   <span className="text-sm text-[var(--text-secondary)] uppercase tracking-wider">
-                    Estimated Offer
+                    {t.summary.estimatedOffer}
                   </span>
                   <div className="text-5xl md:text-6xl font-semibold text-[var(--accent)] mt-4 mb-4">
                     ฿48,500
                   </div>
                   <p className="text-sm text-[var(--text-muted)] max-w-md mx-auto">
-                    This is an estimate based on the information provided. 
-                    Final offer may vary after device inspection.
+                    {t.summary.offerDisclaimer}
                   </p>
                 </div>
               </Card>
@@ -149,11 +151,11 @@ export default function SummaryPage() {
               <div className="flex items-center justify-center gap-6 py-4 text-sm text-[var(--text-secondary)]">
                 <div className="flex items-center gap-2">
                   <Shield className="w-4 h-4 text-[var(--accent)]" />
-                  <span>Secure Transaction</span>
+                  <span>{t.summary.secureTransaction}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Zap className="w-4 h-4 text-[var(--accent)]" />
-                  <span>Fast Payment</span>
+                  <span>{t.summary.fastPayment}</span>
                 </div>
               </div>
 
@@ -161,7 +163,7 @@ export default function SummaryPage() {
                 <Link href="/device-form">
                   <Button variant="secondary" size="md">
                     <Edit3 className="w-4 h-4 mr-2" />
-                    Edit Details
+                    {t.summary.editDetails}
                   </Button>
                 </Link>
 
@@ -169,12 +171,12 @@ export default function SummaryPage() {
                   <Link href="/">
                     <Button variant="ghost" size="md">
                       <RefreshCw className="w-4 h-4 mr-2" />
-                      Start Over
+                      {t.summary.startOver}
                     </Button>
                   </Link>
                   <Button size="md" className="group">
                     <CheckCircle className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
-                    Submit Request
+                    {t.summary.submitRequest}
                   </Button>
                 </div>
               </div>

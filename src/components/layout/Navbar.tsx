@@ -4,8 +4,12 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Smartphone } from "lucide-react";
 import Button from "../ui/Button";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useTranslation } from "@/i18n";
 
 export default function Navbar() {
+  const { t } = useTranslation();
+
   return (
     <motion.nav 
       initial={{ y: -100, opacity: 0 }}
@@ -20,7 +24,7 @@ export default function Navbar() {
               <Smartphone className="w-5 h-5 text-[var(--background)]" />
             </div>
             <span className="text-xl font-semibold text-[var(--text-primary)] tracking-tight">
-              Demo-Rebuy-K.One
+              Demo-Rebuy
             </span>
           </Link>
 
@@ -29,25 +33,28 @@ export default function Navbar() {
               href="#" 
               className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
             >
-              How It Works
+              {t.nav.howItWorks}
             </Link>
             <Link 
               href="#" 
               className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
             >
-              Devices We Buy
+              {t.nav.devicesWeBuy}
             </Link>
             <Link 
               href="#" 
               className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
             >
-              FAQ
+              {t.nav.faq}
             </Link>
           </div>
 
-          <Link href="/device-form">
-            <Button size="sm">Get an Offer</Button>
-          </Link>
+          <div className="flex items-center gap-4">
+            <LanguageSwitcher />
+            <Link href="/device-form">
+              <Button size="sm">{t.nav.getOffer}</Button>
+            </Link>
+          </div>
         </div>
       </div>
     </motion.nav>

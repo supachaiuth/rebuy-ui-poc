@@ -1,4 +1,4 @@
-# Demo-Rebuy-K.One
+# Demo-Rebuy
 
 > Premium Device Buyback UI Prototype
 
@@ -11,7 +11,7 @@
 
 ## 🎯 Overview
 
-Demo-Rebuy-K.One เป็น UI prototype ที่ออกแบบมาเพื่อแสดงความเป็น premium, cinematic, minimal และใช้ dark warm palette เหมาะสำหรับธุรกิจรับซื้ออุปกรณ์ electronics ระดับ luxury
+Demo-Rebuy เป็น UI prototype ที่ออกแบบมาเพื่อแสดงความเป็น premium, cinematic, minimal และใช้ dark warm palette เหมาะสำหรับธุรกิจรับซื้ออุปกรณ์ electronics ระดับ luxury
 
 **Design Direction:**
 - Premium & Cinematic

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Card from "../ui/Card";
+import { useTranslation } from "@/i18n";
 
 const devices = [
   {
@@ -30,6 +31,8 @@ const devices = [
 ];
 
 export default function DeviceGrid() {
+  const { t } = useTranslation();
+
   return (
     <section id="devices" className="py-32 bg-[var(--background)]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -40,10 +43,10 @@ export default function DeviceGrid() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-semibold text-[var(--text-primary)] mb-4 tracking-tight">
-            Devices We Buy
+            {t.deviceGrid.title}
           </h2>
           <p className="text-lg text-[var(--text-secondary)] max-w-xl mx-auto">
-            From the latest generation to older models — we buy them all.
+            {t.deviceGrid.subtitle}
           </p>
         </motion.div>
 
