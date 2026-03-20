@@ -126,7 +126,7 @@ export default function DeviceFormPage() {
     <main className="min-h-screen bg-[var(--background)]">
       <Navbar />
       
-      <div className="pt-32 pb-20 px-6 lg:px-8">
+      <div className="pt-20 sm:pt-24 md:pt-32 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -135,16 +135,16 @@ export default function DeviceFormPage() {
           >
             <Link 
               href="/" 
-              className="inline-flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors mb-8"
+              className="inline-flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors mb-6 sm:mb-8"
             >
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               {t.deviceForm.backToHome}
             </Link>
 
-            <h1 className="text-3xl md:text-4xl font-semibold text-[var(--text-primary)] mb-2">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-[var(--text-primary)] mb-1.5 sm:mb-2">
               {t.deviceForm.title}
             </h1>
-            <p className="text-[var(--text-secondary)] mb-10">
+            <p className="text-sm sm:text-base text-[var(--text-secondary)] mb-8 sm:mb-10">
               {t.deviceForm.subtitle}
             </p>
 
@@ -153,8 +153,8 @@ export default function DeviceFormPage() {
               steps={[t.deviceForm.step1, t.deviceForm.step2, t.deviceForm.step3]} 
             />
 
-            <Card variant="bordered" className="p-8">
-              <div className="space-y-8">
+            <Card variant="bordered" className="p-4 sm:p-6 md:p-8">
+              <div className="space-y-5 sm:space-y-6 md:space-y-8">
                 <Select
                   label={t.deviceForm.title}
                   id="deviceType"
@@ -212,7 +212,7 @@ export default function DeviceFormPage() {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     transition={{ duration: 0.3 }}
-                    className="space-y-6"
+                    className="space-y-4 sm:space-y-5 md:space-y-6"
                   >
                     <Select
                       label="Condition"
@@ -237,10 +237,10 @@ export default function DeviceFormPage() {
                     />
 
                     <div>
-                      <label className="block text-sm text-[var(--text-secondary)] mb-3 font-medium">
+                      <label className="block text-xs sm:text-sm text-[var(--text-secondary)] mb-2 sm:mb-3 font-medium">
                         {t.deviceForm.includedAccessories}
                       </label>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                         {accessoryOptions.map((accessory) => (
                           <Checkbox
                             key={accessory}
@@ -259,27 +259,27 @@ export default function DeviceFormPage() {
                       placeholder={t.deviceForm.notesPlaceholder}
                       value={formData.notes}
                       onChange={(e) => updateField("notes", e.target.value)}
-                      rows={4}
+                      rows={3}
                     />
                   </motion.div>
                 )}
               </div>
 
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mt-10 pt-8 border-t border-[var(--border)]">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 mt-6 sm:mt-8 md:mt-10 pt-5 sm:pt-6 md:pt-8 border-t border-[var(--border)]">
                 <Link href="/">
-                  <Button variant="ghost" size="md">
+                  <Button variant="ghost" size="md" className="w-full sm:w-auto">
                     <ArrowLeft className="w-4 h-4 mr-2" />
                     {t.deviceForm.back}
                   </Button>
                 </Link>
 
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <Button variant="secondary" size="md">
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
+                  <Button variant="secondary" size="md" className="w-full sm:w-auto">
                     <Save className="w-4 h-4 mr-2" />
                     {t.deviceForm.saveDraft}
                   </Button>
-                  <Link href="/summary">
-                    <Button size="md">
+                  <Link href="/summary" className="flex-1 sm:flex-none">
+                    <Button size="md" className="w-full sm:w-auto">
                       {t.deviceForm.checkOffer}
                       <Calculator className="w-4 h-4 ml-2" />
                     </Button>

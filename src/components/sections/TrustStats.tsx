@@ -26,9 +26,9 @@ export default function TrustStats() {
   ];
 
   return (
-    <section className="py-24 bg-[var(--surface)] border-y border-[var(--border)]">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-[var(--surface)] border-y border-[var(--border)]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
@@ -36,16 +36,16 @@ export default function TrustStats() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="flex items-center gap-6 p-6 rounded-2xl bg-[var(--surface-elevated)] border border-[var(--border)]"
+              className="flex items-center gap-4 sm:gap-6 p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl bg-[var(--surface-elevated)] border border-[var(--border)]"
             >
-              <div className="w-14 h-14 rounded-xl bg-[var(--accent-subtle)] flex items-center justify-center flex-shrink-0">
-                <stat.icon className="w-6 h-6 text-[var(--accent)]" />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-[var(--accent-subtle)] flex items-center justify-center flex-shrink-0">
+                <stat.icon className="w-5 h-5 sm:w-6 sm:h-6 text-[var(--accent)]" />
               </div>
               <div>
-                <div className="text-3xl font-semibold text-[var(--text-primary)]">
+                <div className="text-2xl sm:text-3xl font-semibold text-[var(--text-primary)]">
                   {stat.value}
                 </div>
-                <div className="text-sm text-[var(--text-secondary)]">
+                <div className="text-xs sm:text-sm text-[var(--text-secondary)]">
                   {stat.label}
                 </div>
               </div>
