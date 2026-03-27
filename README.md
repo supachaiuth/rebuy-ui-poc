@@ -73,7 +73,7 @@ npm run dev
 ## 📁 Project Structure
 
 ```
-test-project/
+demo-rebuy/
 ├── src/
 │   ├── app/
 │   │   ├── globals.css          # Design tokens & base styles
